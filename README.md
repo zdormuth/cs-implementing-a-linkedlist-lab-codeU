@@ -79,7 +79,7 @@ After this sequence of instructions, we have four Nodes containing the Integers 
 
 The following diagram shows these variables and the objects they refer to:
 
-![linked list](https://dl.dropboxusercontent.com/u/24477149/linked_list_diagram1.png)
+![linked list](https://curriculum-content.s3.amazonaws.com/javacs/cs-implementing-a-linkedlist-lab/linked_list_diagram1.png)
 
 ## Getting set up
 
@@ -118,7 +118,7 @@ As the comments indicate, `size` keeps track of how many elements are in `MyLink
 
 Storing the number of elements is not necessary, and in general it is risky to keep redundant information, because if it's not updated correctly, it creates opportunities for error.  It also takes a little bit of extra space.
 
-But if we store `size` explicitly, we can implement the `size` method in constant time; otherwise, we would have to traverse the list and count the elements, which requires linear time.  
+But if we store `size` explicitly, we can implement the `size` method in constant time; otherwise, we would have to traverse the list and count the elements, which requires linear time.
 
 Because we store `size` explicitly, we have to update it each time we add or remove an element, so that slows down those methods a little, but it doesn't change their order of growth, so it's probably worth it.
 
