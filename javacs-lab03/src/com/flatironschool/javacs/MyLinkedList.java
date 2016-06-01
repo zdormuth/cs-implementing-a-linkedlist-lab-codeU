@@ -86,6 +86,38 @@ public class MyLinkedList<E> implements List<E> {
 	@Override
 	public void add(int index, E element) {
 		// TODO: fill this in
+		if (index > size || index < 0)
+		{
+			throw new IndexOutOfBoundsException();
+		}
+		// adding node within built linkedlist
+		if (index < size)
+		{	
+			if (index == 0)
+			{
+				Node one = new Node(element);
+				one.next = head;
+				head = one;
+			}
+			else
+			{
+				Node first = head;
+				Node second = head.next;
+				for (int i = 0; i < index-1; i++)
+				{
+					first = first.next;
+					second = second.next;
+				}
+				first.next = new Node(element);
+				first.next.next = second;
+			}
+		}			
+		// adding node at the end of the linkedlist
+		else
+		{
+			add(element);
+		}
+		size++;
 	}
 
 	@Override
@@ -146,6 +178,16 @@ public class MyLinkedList<E> implements List<E> {
 
 	@Override
 	public int indexOf(Object target) {
+		Node current = head;
+		// make sure to include if target is equal to null
+		for (int i = 0; i < size; i++)
+		{
+			if (equals(target, current.cargo))
+			{
+				return i;
+			}
+			current = current.next;
+		}
 		// TODO: fill this in
 		return -1;
 	}
@@ -160,7 +202,8 @@ public class MyLinkedList<E> implements List<E> {
 	private boolean equals(Object target, Object element) {
 		if (target == null) {
 			return element == null;
-		} else {
+		}
+		else {
 			return target.equals(element);
 		}
 	}
@@ -201,14 +244,61 @@ public class MyLinkedList<E> implements List<E> {
 
 	@Override
 	public boolean remove(Object obj) {
+		// NOT WORKING
+		if (obj == null)
+		{
+			return false;
+		}
+		else if (head.cargo.equals(obj))
+		{
+			head = head.next;
+			size--;
+			return true;
+		}
+		else
+		{	
+			Node first = head;	
+			Node second = head.next;
+			while (first.next != null)
+			{	
+				// Object found - delete it
+				if (second.cargo.equals(obj))
+				{
+					first.next = second.next;
+					size--;
+					return true;
+				}
+				first = first.next;
+				second = second.next;
+			}				
+		}
 		// TODO: fill this in
 		return false;
+
 	}
 
 	@Override
 	public E remove(int index) {
-		// TODO: fill this in
-		return null;
+		E oldCargo = get(index);
+		if (index == 0)
+		{
+			head = head.next;
+			size--;
+			return oldCargo;
+		}
+		else
+		{
+			Node first = head;
+			Node second = head.next;
+			for (int i = 1; i < index; i++)
+			{
+				first = first.next;
+				second = second.next;
+			}
+			first.next = second.next;
+			size--;
+			return oldCargo;
+		}
 	}
 
 	@Override
